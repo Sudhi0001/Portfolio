@@ -5,134 +5,214 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sudheendra G K – Portfolio</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f9fafb;
-      margin: 0;
-      padding: 0;
-      color: #1f2937;
-    }
+   body {
+  font-family: 'Poppins', sans-serif;
+  background: #f3f4f6;
+  margin: 0;
+  padding: 0;
+  color: #1f2937;
+}
 
-    header {
-      background-color: #1f2937;
-      color: #fff;
-      text-align: center;
-      padding: 3rem 2rem;
-    }
+header {
+  background: linear-gradient(to right, #1f2937, #374151);
+  color: #fff;
+  text-align: center;
+  padding: 3rem 2rem;
+}
 
-    header img {
-      width: 180px;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid #fff;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
+header img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
 
-    header h1 {
-      font-size: 2.5rem;
-      margin-top: 1rem;
-    }
+header h1 {
+  font-size: 2.4rem;
+  margin-top: 1rem;
+  letter-spacing: 1px;
+}
 
-    header p {
-      font-size: 1.2rem;
-      font-weight: 500;
-      margin-top: 0.5rem;
-    }
+header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin-top: 0.5rem;
+}
 
-    section {
-      padding: 2rem;
-      max-width: 900px;
-      margin: auto;
-    }
+section {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
 
-    h2 {
-      color: #111827;
-      font-size: 1.75rem;
-      border-bottom: 2px solid #e5e7eb;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
+h2 {
+  font-size: 2rem;
+  color: #111827;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.4rem;
+  margin-bottom: 1.5rem;
+}
 
-    .technical-skills {
-      background: #fff;
-      margin-bottom: 1.5rem;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      transition: transform 0.2s ease;
-    }
+.technical-skills,
+.project {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-    .technical-skills:hover {
-      transform: translateY(-5px);
-    }
+.technical-skills:hover,
+.project:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
 
-    .technical-skills h3 {
-      margin-top: 0;
-      color: #1d4ed8;
-    }
+.technical-skills h3,
+.project h3 {
+  color: #2563eb;
+  margin-top: 0;
+}
 
-    .technical-skills ul {
-      padding-left: 1rem;
-    }
+.technical-skills ul,
+.project ul {
+  padding-left: 1rem;
+}
 
-    .interest-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 0.75rem;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+.interest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    .interest-grid li {
-      background: #e0f2fe;
-      padding: 0.75rem;
-      border-radius: 8px;
-      text-align: center;
-      font-weight: 500;
-      color: #0c4a6e;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    }
+.interest-grid li {
+  background: #dbeafe;
+  padding: 0.8rem;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 500;
+  color: #1e40af;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: background 0.3s ease;
+}
 
-    .project {
-      background: #fff;
-      margin-bottom: 1.5rem;
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-      transition: transform 0.2s ease;
-    }
+.interest-grid li:hover {
+  background: #bfdbfe;
+}
 
-    .project:hover {
-      transform: translateY(-5px);
-    }
+.project a {
+  display: inline-block;
+  margin-top: 0.7rem;
+  color: #1d4ed8;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
 
-    .project h3 {
-      margin-top: 0;
-      color: #1d4ed8;
-    }
+.project a:hover {
+  color: #1e40af;
+  text-decoration: underline;
+}
 
-    .project a {
-      display: inline-block;
-      margin-top: 0.5rem;
-      color: #2563eb;
-      font-weight: 500;
-    }
+footer {
+  background: #1f2937;
+  color: #fff;
+  text-align: center;
+  padding: 1.2rem;
+  margin-top: 3rem;
+  font-size: 0.95rem;
+}
 
-    footer {
-      background-color: #1f2937;
-      color: #fff;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 3rem;
-    }
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 2rem;
+  }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2rem;
-      }
-    }
+  header img {
+    width: 120px;
+    height: 120px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+.project-grid {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-grid:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+.project-grid h3 {
+  color: #2563eb;
+  margin-top: 0;
+}
+.project-grid p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+}
+.project-grid a {
+  display: inline-block;
+  margin-top: 0.7rem;
+  color: #1d4ed8;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.project-grid a:hover {
+  color: #1e40af;
+  text-decoration: underline;
+}
+body.dark-mode {
+  background: #0f172a;
+  color: #f3f4f6;
+}
+
+header.dark-mode {
+  background: #111827;
+  color: #f3f4f6;
+}
+
+.technical-skills.dark-mode,
+.project.dark-mode {
+  background: #1f2937;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+h2.dark-mode {
+  color: #facc15;
+  border-color: #334155;
+}
+
+.technical-skills h3.dark-mode,
+.project h3.dark-mode {
+  color: #22d3ee;
+}
+
+.interest-grid li.dark-mode {
+  background: #1e293b;
+  color: #a5f3fc;
+}
+
+footer.dark-mode {
+  background: #111827;
+  color: #e5e7eb;
+}
+
   </style>
 </head>
 <body>
@@ -140,11 +220,16 @@
     <img src="pfp.jpg" alt="Sudhi Profile" />
     <h1>Sudheendra G K</h1>
     <p>BTech in Cyber Security | Tech Entrepreneur | Java & Python Developer</p>
+      <button id="toggle-dark-mode" style="margin-top: 15px; padding: 8px 16px; border: none; border-radius: 6px; background-color: #14b8a6; color: white; cursor: pointer; font-size: 0.9rem;">
+   Dark Mode
+  </button>
   </header>
 
   <section>
     <h2>About Me</h2>
     <p>I’m Sudheendra G K, a BTech Cyber Security student with a strong passion for technology, innovation, and entrepreneurship. My focus lies in building scalable, impactful digital products while sharpening my technical skills in Java and Python development. As a budding tech entrepreneur, I am driven by a vision to create solutions that combine security, performance, and real-world utility.</p>
+
+
   </section>
 
   <section>
@@ -181,32 +266,31 @@
     </div>
   </section>
 
-  <section>
+  <section class="projects">
     <h2>Projects</h2>
-    <div class="project">
+    <div class="project-grid" data-aos="fade-up">
       <h3>Wonder – An Online Shopping Website</h3>
       <p>A stylish, responsive shopping website built with HTML & CSS — Wonder where shopping meets simplicity. No-JS fashion e-commerce site with sleek UI, modal-based login/signup, and category-wise product display.</p>
       <a href="https://sudhi0001.github.io/Wonder/" target="_blank">🔗 Visit</a>
     </div>
 
-    <div class="project">
+    <div class="project-grid" data-aos="fade-up">
       <h3>Autobill – Automated Billing System</h3>
       <p>A Python-powered billing software designed for Raspberry Pi. Automates transactions and generates digital receipts for small businesses.</p>
       <a href="https://github.com/Sudhi0001/AutoBilling" target="_blank">🔗 GitHub</a>
     </div>
-
-    <div class="project">
-      <h3>Tic Tac Toe (Java)</h3>
-      <p>A two-player Java game demonstrating core OOP concepts, exception handling, and clean design patterns. Focused on logical flow and user-friendly interface.</p>
-      <a href="https://github.com/Sudhi0001/TicTacToe" target="_blank">🔗 GitHub</a>
-    </div>
-
-    <div class="project">
+    <div class="project-grid" data-aos="fade-up">
       <h3>MindSync – AI-Enabled Learning Platform</h3>
       <p>Designed and developed the backend for an AI-integrated learning hub, supporting interactive content and a dynamic chatbot. Built with scalability and user experience in mind.</p>
       <a href="https://github.com/Sudhi0001/MindSync" target="_blank">🔗 GitHub</a>
       <a href="https://mellifluous-biscotti-379a94.netlify.app/" target="_blank">🌐 Live</a>
     </div>
+
+    <div class="project-grid" data-aos="fade-up">
+      <h3>WellVerra-Marketing Website</h3>
+      <p>Wellverra is a responsive and visually appealing marketing website for a wellness and diet planning startup. The site showcases personalized health plans such as weight gain, weight loss, PCOS, diabetes, thyroid, and keto. It includes animated scroll effects (AOS), client testimonials, a floating CTA button, and direct WhatsApp integration for instant engagement and plan purchase.</p>
+      <a href="https://github.com/Sudhi0001/Wellverra" target="blank">🔗GitHub</a>
+      <a href="https://sudhi0001.github.io/Wellverra/" target="blank">🌐Live</a>
   </section>
 
   <section>
@@ -235,5 +319,27 @@
   <footer>
     <p>© 2025 Sudheendra G K. All Rights Reserved.</p>
   </footer>
+  <script>
+  const toggleButton = document.getElementById("toggle-dark-mode");
+  toggleButton.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    document.querySelector("header").classList.toggle("dark-mode");
+    document.querySelectorAll(".technical-skills, .project, h2, h3, footer, .interest-grid li").forEach(el => {
+      el.classList.toggle("dark-mode");
+    });
+  });
+</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon"/>
 </body>
 </html>
