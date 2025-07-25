@@ -196,7 +196,7 @@
   <!-- HEADER with Artistic BG -->
   <header class="wave-bg overflow-hidden relative pb-20 pt-12 px-4 md:px-0">
     <div class="max-w-3xl mx-auto flex flex-col items-center z-10 relative">
-      <img src="images/pfp.jpg" alt="Profile picture of Sudheendra G K" class="w-40 h-40 rounded-full border-4 border-accent shadow-2xl object-cover mb-5 ring-2 ring-white/60">
+      <img src="images/" alt="Profile picture of Sudheendra G K" class="w-40 h-40 rounded-full border-4 border-accent shadow-2xl object-cover mb-5 ring-2 ring-white/60">
       <h1 class="text-5xl md:text-6xl font-heading font-bold text-accent drop-shadow-lg tracking-tighter">Sudheendra G K</h1>
       <p class="text-lg mt-2 font-medium text-blue-100">Cyber Security Student · Tech Entrepreneur · Java & Python Developer · UI/UX & Frontend Specialist</p>
       <span class="text-base italic mt-1 text-accent/80">Designing secure, beautiful, and impactful digital products</span>
@@ -443,12 +443,23 @@ A sleek and responsive wellness platform featuring interactive testimonial slide
 
 
 
-    <!-- RESUME -->
-    <section class="max-w-3xl mx-auto glass rounded-2xl p-8 shadow-xl my-6" data-aos="fade-up">
-      <div class="divider"></div>
-      <h2 class="text-2xl font-heading font-bold text-accent mb-2">Resume</h2>
-      <a href="resume001.pdf" target="_blank" class="flex gap-2 items-center text-accent hover:text-yellow-200 hover:underline text-lg font-semibold transition"><i class="fas fa-file-pdf"></i> Download Resume (PDF)</a>
-    </section>
+    
+   <!-- Resume Section -->
+<section class="max-w-3xl mx-auto glass rounded-2xl p-8 shadow-xl my-6" data-aos="fade-up">
+  <div class="divider"></div>
+  <h2 class="text-2xl font-heading font-bold text-accent mb-2">Resume</h2>
+  <button onclick="openResumeModal()" class="flex gap-2 items-center text-accent hover:text-yellow-200 hover:underline text-lg font-semibold transition">
+    <i class="fas fa-file-pdf"></i> View Resume (PDF)
+  </button>
+</section>
+
+<!-- Modal -->
+<div id="resumeModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 hidden">
+  <div class="relative w-full max-w-4xl h-[90vh] bg-white rounded-lg overflow-hidden shadow-lg">
+    <button onclick="closeResumeModal()" class="absolute top-3 right-4 text-3xl font-bold text-black hover:text-red-500">&times;</button>
+    <iframe src="resume001.pdf" class="w-full h-full" frameborder="0"></iframe>
+  </div>
+</div>
 
     <!-- CONTACT -->
     <section class="max-w-3xl mx-auto glass rounded-2xl p-8 shadow-xl my-6" data-aos="fade-up">
@@ -580,8 +591,14 @@ function closeModal() {
 }
 
 </script>
+<script>
+  function openResumeModal() {
+    document.getElementById("resumeModal").classList.remove("hidden");
+  }
 
-
-
+  function closeResumeModal() {
+    document.getElementById("resumeModal").classList.add("hidden");
+  }
+</script>
 </body>
 </html>
