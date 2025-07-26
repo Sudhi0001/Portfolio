@@ -35,44 +35,57 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon"/>
   <style>
-    .wave-bg {
-      background: linear-gradient(135deg, #23233f 70%, #FFD700 200%);
-      position: relative;
-    }
-    .wave-bg:after {
-      content: '';
-      position: absolute;
-      left:0;right:0;bottom:-24px;height:64px;
-      background: url('data:image/svg+xml;utf8,<svg width="100%" height="64" xmlns="http://www.w3.org/2000/svg"><path d="M0,10 Q100,60 400,10 T800,20 L800,64 L0,64 Z" fill="%23FFD700" fill-opacity="0.09"/></svg>');
-      pointer-events: none;
-    }
-    .glass {
-      background: rgba(36,38,50,0.7);
-      backdrop-filter: blur(12px);
-    }
-    /* Colorful divider bar */
-    .divider {
-      height: 3px;
-      background: linear-gradient(90deg, #FFD700 10%, #ffb03a 40%, #49e9ff 80%, #FFD700 100%);
-      border-radius: 2px;
-      margin: 2rem 0 1.5rem 0;
-      width: 4rem;
-    }
-    /* Animated dark mode toggle */
-    .toggle-slider {
-      display: inline-block;
-      width: 48px; height: 26px;
-      background: #bbb; border-radius: 26px; position: relative; cursor: pointer;
-      transition: background .25s;
-    }
-    .toggle-slider.active { background: #FFD700;}
-    .toggle-dot {
-      position: absolute; top:3px; left:3px; width:20px; height:20px; border-radius:50%; background:#fff;
-      box-shadow: 0 1px 5px 0 #0002;
-      transition: left .3s, background .25s;
-    }
-    .toggle-slider.active .toggle-dot { left:25px; background: #FFD700;}
-   .certificate-slider {
+    
+  .wave-bg {
+  background: linear-gradient(135deg, #23233f 70%, #FFD700 200%);
+  position: relative;
+  overflow: hidden;
+}
+.wave-bg:after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -24px; height: 64px;
+  background: url('data:image/svg+xml;utf8,<svg width="100%" height="64" xmlns="http://www.w3.org/2000/svg"><path d="M0,10 Q100,60 400,10 T800,20 L800,64 L0,64 Z" fill="%23FFD700" fill-opacity="0.09"/></svg>');
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glass {
+  background: rgba(36, 38, 50, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* Divider */
+.divider {
+  height: 3px;
+  width: 4rem;
+  margin: 2rem 0 1.5rem;
+  background: linear-gradient(90deg, #FFD700 10%, #ffb03a 40%, #49e9ff 80%, #FFD700 100%);
+  border-radius: 2px;
+}
+
+/* Dark Mode Toggle */
+.toggle-slider {
+  width: 48px; height: 26px;
+  background: #bbb; border-radius: 26px;
+  position: relative; cursor: pointer;
+  transition: background 0.25s ease-in-out;
+}
+.toggle-slider.active { background: #FFD700; }
+.toggle-dot {
+  position: absolute; top: 3px; left: 3px;
+  width: 20px; height: 20px;
+  border-radius: 50%; background: #fff;
+  box-shadow: 0 1px 5px #0002;
+  transition: left 0.3s ease, background 0.25s ease;
+}
+.toggle-slider.active .toggle-dot {
+  left: 25px; background: #FFD700;
+}
+
+/* Card Slider */
+.certificate-slider {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,32 +97,36 @@
   display: flex;
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding: 10px 0;
   gap: 20px;
+  padding: 10px 0;
   scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+}
+.cards-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .card {
+  scroll-snap-align: start;
   position: relative;
-  border-radius: 16px;
-  overflow: hidden;
   min-width: 280px;
   height: 280px;
-  background-color: #232347; /* Deep navy blue */
-  border: 2px solid transparent;
-  background-clip: padding-box;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3), 0 6px 18px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #232347;
   background-image: linear-gradient(#232347, #232347),
     linear-gradient(135deg, gold, #fcd116, #ffcc00);
   background-origin: border-box;
   background-clip: content-box, border-box;
+  border: 2px solid transparent;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.3), 0 6px 18px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .card:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.4);
+  transform: scale(1.035);
+  box-shadow: 0 0 24px rgba(255, 215, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 .card img {
@@ -122,74 +139,197 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  background-color: #1a1a30;
-  color: white;
+  background: #1a1a30;
+  color: #fff;
   font-size: 13px;
   font-weight: 500;
-  text-align: center;
   padding: 6px 10px;
-  margin: 0;
+  text-align: center;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 0;
 }
 
-
+/* Slider buttons */
 .slider-btn {
-  background-color: #233355;
+  background: #233355;
   color: white;
   border: none;
   font-size: 24px;
   padding: 10px 14px;
-  cursor: pointer;
   border-radius: 50%;
-  transition: 0.2s ease-in-out;
+  cursor: pointer;
   z-index: 2;
+  transition: background 0.2s ease-in-out;
 }
-
 .slider-btn:hover {
-  background-color: #3e4c6d;
+  background: #3e4c6d;
 }
 
-/* Modal Styles */
+/* Modal */
 .image-modal {
   display: none;
   position: fixed;
   z-index: 99;
   left: 0; top: 0;
   width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.85);
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  animation: fadeIn 0.3s ease;
 }
-
 .image-modal img {
   max-width: 90%;
   max-height: 80%;
   border-radius: 10px;
 }
-
 .image-modal #caption {
-  color: white;
+  color: #fff;
   margin-top: 12px;
   font-size: 16px;
   font-weight: 500;
 }
-
 .close-btn {
   position: absolute;
-  top: 20px;
-  right: 35px;
+  top: 20px; right: 35px;
   color: white;
   font-size: 36px;
   cursor: pointer;
 }
 
+/* Hero Section */
+.hero-section.container {
+  padding: 80px 20px;
+  text-align: center;
+}
+.hero-content {
+  animation: slideFadeUp 1s ease-out forwards;
+  opacity: 0;
+  position: relative;
+  z-index: 1;
+}
+.hero-content h1 {
+  font-size: 2.8rem;
+  font-weight: 700;
+}
+.hero-content p {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: 2rem;
+}
 
+/* Resume Modal */
+.resume-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.5s ease forwards;
+}
+.resume-modal-content {
+  background: #1e1e2f;
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
+  animation: scaleIn 0.3s ease forwards;
+}
+.resume-preview {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  margin: 20px 0;
+  border-radius: 10px;
+}
+.modal-actions .btn {
+  margin: 0 10px;
+}
+.close-modal {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 28px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.close-modal:hover {
+  color: #ff4f4f;
+  transform: rotate(90deg);
+}
+.modal-title {
+  font-size: 1.5rem;
+  color: #FFD700;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes slideFadeUp {
+  0% { transform: translateY(40px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes floatGlow {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(20px, 20px); }
+}
+
+/* Glow Button Hover */
+.btn.glow-btn {
+  transition: 0.3s ease;
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+}
+.btn.glow-btn:hover {
+  box-shadow: 0 0 12px 2px #fcd116;
+  transform: scale(1.05);
+}
+
+/* Project Cards */
+.project-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  padding: 1.75rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(14px);
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease;
+}
+.project-card:hover {
+  transform: scale(1.05);
+  background: linear-gradient(145deg, rgba(50, 20, 90, 0.4), rgba(100, 20, 150, 0.25));
+  box-shadow: 0 0 30px #ffcc00;
+}
+.card-content {
+  opacity: 0.95;
+  transition: all 0.4s ease;
+}
+.buttons a.btn {
+  display: inline-block;
+  margin-top: 10px;
+  margin-right: 10px;
+  background: #fcd116;
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  transition: background 0.3s ease;
+}
+.buttons a.btn:hover {
+  background: #ffdb4d;
+}
 </style>
-
-
-    
-  
 </head>
 <body class="font-poppins bg-primary text-gray-200 dark:bg-secondary dark:text-gray-50 transition-colors duration-500">
 
@@ -208,22 +348,36 @@
       </div>
     </div>
   </header>
+  
 
   <main class="mt-2">
     <!-- ABOUT -->
-    <section class="max-w-3xl mx-auto glass rounded-2xl p-8 shadow-xl my-8" data-aos="fade-up">
-      <div class="divider"></div>
-      <h2 class="text-3xl font-heading font-bold mb-2 text-accent">About Me</h2>
-      <p class="text-lg text-gray-100">
-        Hello! I’m <span class="text-accent font-semibold">Sudheendra G K</span>,I’m a BTech Cyber Security student and passionate tech creator, blending creativity with code, security principles, and business strategy.
+    <!-- 🔥 HERO SECTION -->
+<section class="hero-section container glass" id="hero">
+  <div class="hero-content" data-aos="fade-up">
+    <h1>Hello, I’m <span class="highlight">Sudheendra G K</span></h1>
+    <p>Turning ideas into interactive realities.<br>Web Developer • Designer • Innovator</p>
+    <div class="hero-buttons">
+      <button class="btn glow-btn" id="openResumeModal">View Resume</button>
+      <a href="mailto:sudhig10@gmail.com" class="btn glow-btn">Hire Me</a>
+    </div>
+  </div>
+</section>
 
-I build secure, scalable, and interactive digital products using Java, Python, HTML, CSS, and JavaScript, with a strong focus on UI/UX design and frontend development.
+<!-- 📄 RESUME MODAL -->
+<div class="resume-modal" id="resumeModal">
+  <div class="resume-modal-content">
+    <span class="close-modal" id="closeResumeModal">&times;</span>
+    <h2 class="modal-title">My Resume</h2>
+    <div class="modal-actions">
+      <a href="resume001.pdf" target="_blank" class="btn view-btn">View Fullscreen</a>
+      <a href="resume001.pdf" download class="btn download-btn">Download</a>
+    </div>
+  </div>
+</div>
 
-I’ve led and contributed to multiple real-world projects including Wonder (e-commerce UI), MindSync (AI support platform), FREEJUNX (freelance marketing site), Algo Arena (interactive coding dashboard), and Autobill (automated billing tool)—each reflecting my ability to merge functionality with clean design.
 
-I'm driven by product thinking and problem-solving, and I love turning ideas into real, impactful web experienceat make a difference.
-      </p>
-    </section>
+   
 
     <!-- SKILLS -->
     <section class="max-w-3xl mx-auto glass rounded-2xl p-8 shadow-glow my-6" data-aos="fade-up">
@@ -333,68 +487,111 @@ I'm driven by product thinking and problem-solving, and I love turning ideas int
       </div>
     </section>
 
-    <!-- PROJECTS -->
-    <section class="max-w-3xl mx-auto glass rounded-2xl p-8 shadow-glow my-6" data-aos="fade-up">
-      <div class="divider"></div>
-      <h2 class="text-2xl font-heading font-bold text-accent mb-2">Projects</h2>
-      <div class="grid grid-cols-1 gap-6">
-        <!-- Sample Project Card (repeat for more) -->
-          <div class="flex gap-3 mt-4">
-            <div class="relative bg-gradient-to-tr from-[#191937e6] via-[#23233fdd] to-[#FFD70022] rounded-2xl p-6 shadow-xl ring-2 ring-accent/40 group hover:scale-[1.02] hover:shadow-glow transition-transform duration-300 overflow-hidden">
-  <h3 class="text-xl font-bold text-accent flex items-center gap-2">
-    <i class="fas fa-utensils"></i> Freejunx – Marketing Website
-  </h3>
-  <p class="mt-2 text-gray-100">
-    Freelance project for a gourmet frozen-food startup. Built a clean, responsive marketing site featuring product showcases, nutrition highlights, animated scrolls, floating CTAs, and modal-based login/register. Crafted to reflect the healthy, oil-free brand identity and build user trust.
-  </p>
-   <a href="https://github.com/Sudhi0001/Freejunx" target="_blank" class="inline-flex gap-1 items-center text-accent hover:text-yellow-300 font-semibold transition-colors">
-      <i class="fab fa-github"></i> GitHub
-    </a>
-    <a href="https://github.com/Freejunxfoods/marketing" target="_blank" class="inline-flex gap-1 items-center text-accent hover:text-yellow-300 font-semibold transition-colors">
-      <i class="fas fa-globe"></i> Live
-    </a>
- 
-</div>
-   
+   <section class="projects-section p-8">
+  <h2 class="text-4xl font-bold text-white text-center mb-12" data-aos="fade-up">Projects</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
+    
+  <!-- Project Cards -->
+       <!-- Wonder -->
+    <div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50" data-aos="zoom-in" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.4">
+      <div class="card-content">
+        <h3 class="text-xl font-semibold text-white mb-2">Wonder - E-Commerce</h3>
+        <p class="text-gray-300 text-sm mb-3">Responsive e-commerce frontend with modal login, dynamic JS, and category navigation.</p>
+        <p class="text-xs text-purple-300 mb-3">HTML · CSS · JavaScript · Tailwind</p>
+        <div class="buttons">
+          <a href="https://github.com/Sudhi0001/Wonder" target="_blank" class="btn">GitHub</a>
+          <a href="https://sudhi0001.github.io/Wonder/" target="_blank" class="btn">Live</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MindSync -->
+    <div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/50" data-aos="zoom-in" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.4">
+      <div class="card-content">
+        <h3 class="text-xl font-semibold text-white mb-2">MindSync - AI Support Platform</h3>
+        <p class="text-gray-300 text-sm mb-3">A student helpdesk AI assistant and educational resource hub with doubt clarification and notes.</p>
+        <p class="text-xs text-purple-300 mb-3">HTML · CSS · JS · AI API</p>
+        <div class="buttons">
+          <a href="https://github.com/Sudhi0001/MindSync" target="_blank" class="btn">GitHub</a>
+          <a href="#" class="btn">Live</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Algo Arena -->
+    <div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/50" data-aos="zoom-in" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.4">
+      <div class="card-content">
+        <h3 class="text-xl font-semibold text-white mb-2">Algo Arena - DSA Playground</h3>
+        <p class="text-gray-300 text-sm mb-3">Interactive DSA dashboard with quizzes, visualizers, XP system, and gamified learning.</p>
+        <p class="text-xs text-purple-300 mb-3">HTML · CSS · JavaScript · Chart.js</p>
+        <div class="buttons">
+          <a href="https://github.com/Sudhi0001/AlgoArena" target="_blank" class="btn">GitHub</a>
+          <a href="https://sudhi0001.github.io/AlgoArena/" target="_blank" class="btn">Live</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Freejunx -->
+    <div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/50" data-aos="zoom-in" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.4">
+      <div class="card-content">
+        <h3 class="text-xl font-semibold text-white mb-2">Freejunx - Freelance Website</h3>
+        <p class="text-gray-300 text-sm mb-3">Gourmet food website built from scratch. Delivered at ₹9K, agency quality worth ₹75K.</p>
+        <p class="text-xs text-purple-300 mb-3">HTML · CSS · JavaScript · Responsive</p>
+        <div class="buttons">
+          <a href="https://github.com/Sudhi0001/Freejunx" target="_blank" class="btn">GitHub</a>
+          <a href="https://freejunxfoods.github.io/marketing/" target="_blank" class="btn">Live</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEL -->
+    <div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50" data-aos="zoom-in" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.4">
+      <div class="card-content">
+        <h3 class="text-xl font-semibold text-white mb-2">BEL Internship Project</h3>
+        <p class="text-gray-300 text-sm mb-3">Text summarization tool using ML techniques done as part of Bharat Electronics internship.</p>
+        <p class="text-xs text-purple-300 mb-3">Python · ML · Flask</p>
+        <div class="buttons">
+          <a href="https://github.com/Sudhi0001/BELTextSummarizer" target="_blank" class="btn">GitHub</a>
+          <a href="#" class="btn">Live</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- WellVerra -->
+<div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-teal-500/50"
+     data-aos="zoom-in" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.4">
+  <div class="card-content">
+    <h3 class="text-xl font-semibold text-white mb-2">WellVerra – Wellness Platform</h3>
+    <p class="text-gray-300 text-sm mb-3">Sleek health & wellness website with animations, testimonials, and WhatsApp CTAs.</p>
+    <p class="text-xs text-purple-300 mb-3">HTML · CSS · JavaScript · Tailwind · WhatsApp API</p>
+    <div class="buttons flex gap-3">
+      <a href="https://github.com/Sudhi0001/Wellverra" target="_blank" class="btn flex items-center gap-2">
+        <!-- GitHub icon SVG -->
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12…Z" />
+        </svg>
+        GitHub
+      </a>
+      <a href="https://sudhi0001.github.io/Wellverra" target="_blank" class="btn flex items-center gap-2">
+        <!-- Live icon SVG -->
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M14 3h7v7m0 0L10 21l-4-4L21 10z"/>
+        </svg>
+        Live
+      </a>
+    </div>
   </div>
-        <div class="relative bg-gradient-to-tr from-[#191937e6] via-[#23233fdd] to-[#FFD70022] rounded-2xl p-6 shadow-xl ring-2 ring-accent/40 group hover:scale-[1.02] hover:shadow-glow transition-transform duration-300 overflow-hidden">
-          <h3 class="text-xl font-bold text-accent flex items-center gap-2"><i class="fas fa-cart-arrow-down"></i> Wonder – Shopping Website</h3>
-          <p class="mt-2 text-gray-100">A stylish and fully responsive e-commerce UI built using HTML, CSS & JS. Includes interactive modals (login/signup/profile), a welcome popup, category-based product layout, and smooth user experience — ideal for showcasing frontend skills.</p>
-          <div class="flex gap-3 mt-4">
-          <a href="https://github.com/Sudhi0001/Wonder" target="_blank" class="inline-flex gap-1 items-center text-accent hover:text-yellow-300 font-semibold transition-colors"><i class="fab fa-github"></i> GitHub</a></div>
-          <a href="https://sudhi0001.github.io/Wonder/" target="_blank" class="inline-flex gap-1 items-center text-accent hover:text-yellow-300 font-semibold transition-colors"><i class="fas fa-globe"></i> Live</a>
+</div>
 
-        </div>
-        <div class="relative bg-gradient-to-tr from-[#191937e6] via-[#23233fdd] to-[#FFD70022] rounded-2xl p-6 shadow-xl ring-2 ring-accent/40 group hover:scale-[1.02] hover:shadow-glow transition-transform duration-300 overflow-hidden">
-          <h3 class="text-xl font-bold text-accent flex items-center gap-2"><i class="fas fa-file-invoice-dollar"></i> Autobill – Automated Billing System</h3>
-          <p class="mt-2 text-gray-100">Python-powered billing for Raspberry Pi, with digital receipts for businesses.</p>
-          <div class="flex gap-3 mt-4">
-            <a href="https://github.com/Sudhi0001/AutoBilling" target="_blank" class="inline-flex gap-1 items-center text-accent hover:text-yellow-300 font-semibold transition-colors"><i class="fab fa-github"></i> GitHub</a>
 
-          </div>
-        </div>
-        <div class="relative bg-gradient-to-tr from-[#191937e6] via-[#23233fdd] to-[#FFD70022] rounded-2xl p-6 shadow-xl ring-2 ring-accent/40 group hover:scale-[1.02] hover:shadow-glow transition-transform duration-300 overflow-hidden">
-          <h3 class="text-xl font-bold text-accent flex items-center gap-2"><i class="fas fa-brain"></i> MindSync – AI Learning Platform</h3>
-          <p class="mt-2 text-gray-100">Backend-integrated platform with smart AI chat support, enabling next-gen, interactive learning experiences. Built for scalability and intuitive access to notes, quizzes, resources, and real-time doubt resolution.</p>
-          <div class="flex gap-3 mt-4">
-            <a href="https://github.com/Sudhi0001/MindSync" target="_blank" class="inline-flex gap-1 items-center text-accent hover:text-yellow-300 font-semibold transition-colors"><i class="fab fa-github"></i> GitHub</a>
-            <a href="https://mellifluous-biscotti-379a94.netlify.app/" target="_blank" class="inline-flex gap-1 items-center text-accent hover:text-yellow-300 font-semibold transition-colors"><i class="fas fa-globe"></i> Live</a>
-          </div>
-        </div>
-        <div class="relative bg-gradient-to-tr from-[#191937e6] via-[#23233fdd] to-[#FFD70022] rounded-2xl p-6 shadow-xl ring-2 ring-accent/40 group hover:scale-[1.02] hover:shadow-glow transition-transform duration-300 overflow-hidden">
-          <h3 class="text-xl font-bold text-accent flex items-center gap-2"><i class="fas fa-heartbeat"></i> WellVerra – Marketing Site</h3>
-          <p class="mt-2 text-gray-100"> Wellverra – Your Wellness Companion
-A sleek and responsive wellness platform featuring interactive testimonial sliders, seamless user experience, and a direct WhatsApp CTA for instant engagement and support..</p>
-          <div class="flex gap-3 mt-4">
-            <a href="https://github.com/Sudhi0001/Wellverra" target="_blank" class="inline-flex gap-1 items-center text-accent hover:text-yellow-300 font-semibold transition-colors"><i class="fab fa-github"></i> GitHub</a>
-            <a href="https://sudhi0001.github.io/Wellverra/" target="_blank" class="inline-flex gap-1 items-center text-accent hover:text-yellow-300 font-semibold transition-colors"><i class="fas fa-globe"></i> Live</a>
-          </div>
-        </div>
+  </div>
+</section>
+
+
        
 
 
-      </div>
-    </section>
+    
 <div class="certificate-slider">
   <button class="slider-btn prev" onclick="slideLeft()">&#10094;</button>
   <div class="cards-wrapper" id="sliderWrapper">
@@ -484,7 +681,7 @@ A sleek and responsive wellness platform featuring interactive testimonial slide
   </footer>
 
   <!-- DARK MODE SCRIPT (Animated, Persistent) -->
-  <script>
+ <script>
   // DARK MODE TOGGLE
   const darkToggle = document.getElementById('darkToggle');
   function setDarkModeOnStartup() {
@@ -494,25 +691,26 @@ A sleek and responsive wellness platform featuring interactive testimonial slide
       darkToggle.setAttribute('aria-pressed', 'true');
     }
   }
+
   setDarkModeOnStartup();
 
-  darkToggle.addEventListener('click', () => {
+  darkToggle?.addEventListener('click', () => {
     const isDark = document.documentElement.classList.toggle('dark');
     darkToggle.classList.toggle('active', isDark);
     darkToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   });
 
-  darkToggle.addEventListener('keydown', e => {
+  darkToggle?.addEventListener('keydown', e => {
     if (e.key === ' ' || e.key === 'Enter') darkToggle.click();
   });
 </script>
 
 <script>
-  // ACCORDION FOR CERTIFICATE DETAIL
+  // CERTIFICATE ACCORDION
   function toggleCert(id) {
-    const detail = document.getElementById(id + '-detail');
-    const isOpen = detail.style.maxHeight && detail.style.maxHeight !== '0px';
+    const detail = document.getElementById(`${id}-detail`);
+    const isOpen = detail?.style.maxHeight && detail.style.maxHeight !== '0px';
 
     document.querySelectorAll('[id$="-detail"]').forEach(el => {
       el.style.maxHeight = null;
@@ -520,7 +718,7 @@ A sleek and responsive wellness platform featuring interactive testimonial slide
       el.parentElement.setAttribute('aria-expanded', 'false');
     });
 
-    if (!isOpen) {
+    if (!isOpen && detail) {
       detail.style.maxHeight = detail.scrollHeight + 'px';
       detail.style.opacity = 1;
       detail.parentElement.setAttribute('aria-expanded', 'true');
@@ -536,69 +734,118 @@ A sleek and responsive wellness platform featuring interactive testimonial slide
 </script>
 
 <script>
-  // SLIDER FUNCTIONALITY
-  const slider = document.getElementById('slider');
-
-  function slideLeft() {
-    slider.scrollBy({ left: -320, behavior: 'smooth' });
-  }
-
-  function slideRight() {
-    slider.scrollBy({ left: 320, behavior: 'smooth' });
-  }
-</script>
-
-<script>
-  // MODAL FUNCTIONALITY
-  function openModal(imgSrc, caption = '') {
-    const modal = document.getElementById('certificateModal');
-    const modalImg = document.getElementById('modalImage');
-    const modalCaption = document.getElementById('modalCaption');
+  // CERTIFICATE IMAGE MODAL & SLIDER
+  function openModal(imageSrc, caption = '') {
+    const modal = document.getElementById('imageModal');
+    if (!modal) return;
+    document.getElementById('modalImg').src = imageSrc;
+    document.getElementById('caption').innerText = caption;
     modal.style.display = 'flex';
-    modalImg.src = imgSrc;
-    modalCaption.textContent = caption;
   }
 
   function closeModal() {
-    const modal = document.getElementById('certificateModal');
-    modal.style.display = 'none';
+    const modal = document.getElementById('imageModal');
+    if (modal) modal.style.display = 'none';
   }
 
-  // Close modal on outside click
+  function slideLeft() {
+    document.getElementById('sliderWrapper')?.scrollBy({ left: -320, behavior: 'smooth' });
+  }
+
+  function slideRight() {
+    document.getElementById('sliderWrapper')?.scrollBy({ left: 320, behavior: 'smooth' });
+  }
+
   window.addEventListener('click', (e) => {
-    const modal = document.getElementById('certificateModal');
-    if (e.target === modal) {
+    const imageModal = document.getElementById('imageModal');
+    if (e.target === imageModal) {
       closeModal();
     }
   });
-  function slideLeft() {
-  document.getElementById('sliderWrapper').scrollBy({ left: -320, behavior: 'smooth' });
-}
-
-function slideRight() {
-  document.getElementById('sliderWrapper').scrollBy({ left: 320, behavior: 'smooth' });
-}
-
-function openModal(imageSrc, caption) {
-  const modal = document.getElementById('imageModal');
-  document.getElementById('modalImg').src = imageSrc;
-  document.getElementById('caption').innerText = caption;
-  modal.style.display = "flex";
-}
-
-function closeModal() {
-  document.getElementById('imageModal').style.display = "none";
-}
-
 </script>
+
 <script>
-  function openResumeModal() {
-    document.getElementById("resumeModal").classList.remove("hidden");
-  }
+  // RESUME MODAL FUNCTIONALITY
+  window.addEventListener('DOMContentLoaded', () => {
+    const openBtn = document.getElementById('openResumeModal');
+    const closeBtn = document.getElementById('closeResumeModal');
+    const modal = document.getElementById('resumeModal');
 
-  function closeResumeModal() {
-    document.getElementById("resumeModal").classList.add("hidden");
-  }
+    if (openBtn && closeBtn && modal) {
+      openBtn.addEventListener('click', () => {
+        modal.style.display = 'flex';
+      });
+
+      closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+
+      window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+    }
+  });
 </script>
+
+<script>
+  const openResumeModal = document.getElementById("openResumeModal");
+  const closeResumeModal = document.getElementById("closeResumeModal");
+  const resumeModal = document.getElementById("resumeModal");
+
+  openResumeModal.addEventListener("click", () => {
+    resumeModal.style.display = "flex";
+  });
+
+  closeResumeModal.addEventListener("click", () => {
+    resumeModal.style.display = "none";
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === resumeModal) {
+      resumeModal.style.display = "none";
+    }
+  });
+</script>
+
+<!-- AOS Animation -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+<!-- Vanilla Tilt -->
+<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
+<script>
+  // Enhanced Tilt + Glow + Hover
+  document.addEventListener("DOMContentLoaded", () => {
+    VanillaTilt.init(document.querySelectorAll(".project-card"), {
+      max: 15,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.2
+    });
+
+    document.querySelectorAll(".project-card").forEach(card => {
+      card.addEventListener("mouseenter", () => {
+        card.classList.add("hovered");
+      });
+      card.addEventListener("mouseleave", () => {
+        card.classList.remove("hovered");
+      });
+    });
+  });
+</script>
+<style>
+  .project-card.hovered {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px rgba(147, 51, 234, 0.6), 0 0 10px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+</style>
+
+
 </body>
 </html>
