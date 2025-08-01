@@ -35,303 +35,264 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="icon" href="favicon.ico" type="image/x-icon"/>
   <style>
-    
-  .wave-bg {
-  background: linear-gradient(135deg, #23233f 70%, #FFD700 200%);
-  position: relative;
-  overflow: hidden;
-}
-.wave-bg:after {
-  content: '';
-  position: absolute;
-  left: 0; right: 0; bottom: -24px; height: 64px;
-  background: url('data:image/svg+xml;utf8,<svg width="100%" height="64" xmlns="http://www.w3.org/2000/svg"><path d="M0,10 Q100,60 400,10 T800,20 L800,64 L0,64 Z" fill="%23FFD700" fill-opacity="0.09"/></svg>');
-  pointer-events: none;
-  z-index: 1;
-}
-
-.glass {
-  background: rgba(36, 38, 50, 0.72);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
-/* Divider */
-.divider {
-  height: 3px;
-  width: 4rem;
-  margin: 2rem 0 1.5rem;
-  background: linear-gradient(90deg, #FFD700 10%, #ffb03a 40%, #49e9ff 80%, #FFD700 100%);
-  border-radius: 2px;
-}
-
-/* Dark Mode Toggle */
-.toggle-slider {
-  width: 48px; height: 26px;
-  background: #bbb; border-radius: 26px;
-  position: relative; cursor: pointer;
-  transition: background 0.25s ease-in-out;
-}
-.toggle-slider.active { background: #FFD700; }
-.toggle-dot {
-  position: absolute; top: 3px; left: 3px;
-  width: 20px; height: 20px;
-  border-radius: 50%; background: #fff;
-  box-shadow: 0 1px 5px #0002;
-  transition: left 0.3s ease, background 0.25s ease;
-}
-.toggle-slider.active .toggle-dot {
-  left: 25px; background: #FFD700;
-}
-
-/* Card Slider */
-.certificate-slider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 40px 0;
-  position: relative;
-}
-
-.cards-wrapper {
-  display: flex;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  gap: 20px;
-  padding: 10px 0;
-  scrollbar-width: none;
-  scroll-snap-type: x mandatory;
-}
-.cards-wrapper::-webkit-scrollbar {
-  display: none;
-}
-
-.card {
-  scroll-snap-align: start;
-  position: relative;
-  min-width: 280px;
-  height: 280px;
-  border-radius: 16px;
-  overflow: hidden;
-  background-color: #232347;
-  background-image: linear-gradient(#232347, #232347),
-    linear-gradient(135deg, gold, #fcd116, #ffcc00);
-  background-origin: border-box;
-  background-clip: content-box, border-box;
-  border: 2px solid transparent;
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.3), 0 6px 18px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-}
-
-.card:hover {
-  transform: scale(1.035);
-  box-shadow: 0 0 24px rgba(255, 215, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.4);
-}
-
-.card img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.card p {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: #1a1a30;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 6px 10px;
-  text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  margin: 0;
-}
-
-/* Slider buttons */
-.slider-btn {
-  background: #233355;
-  color: white;
-  border: none;
-  font-size: 24px;
-  padding: 10px 14px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 2;
-  transition: background 0.2s ease-in-out;
-}
-.slider-btn:hover {
-  background: #3e4c6d;
-}
-
-/* Modal */
-.image-modal {
-  display: none;
-  position: fixed;
-  z-index: 99;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.85);
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  animation: fadeIn 0.3s ease;
-}
-.image-modal img {
-  max-width: 90%;
-  max-height: 80%;
-  border-radius: 10px;
-}
-.image-modal #caption {
-  color: #fff;
-  margin-top: 12px;
-  font-size: 16px;
-  font-weight: 500;
-}
-.close-btn {
-  position: absolute;
-  top: 20px; right: 35px;
-  color: white;
-  font-size: 36px;
-  cursor: pointer;
-}
-
-/* Hero Section */
-.hero-section.container {
-  padding: 80px 20px;
-  text-align: center;
-}
-.hero-content {
-  animation: slideFadeUp 1s ease-out forwards;
-  opacity: 0;
-  position: relative;
-  z-index: 1;
-}
-.hero-content h1 {
-  font-size: 2.8rem;
-  font-weight: 700;
-}
-.hero-content p {
-  font-size: 1.2rem;
-  color: #ccc;
-  margin-bottom: 2rem;
-}
-
-/* Resume Modal */
-.resume-modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 0.5s ease forwards;
-}
-.resume-modal-content {
-  background: #1e1e2f;
-  padding: 2rem;
-  border-radius: 16px;
-  max-width: 600px;
-  text-align: center;
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
-  animation: scaleIn 0.3s ease forwards;
-}
-.resume-preview {
-  width: 100%;
-  max-height: 400px;
-  object-fit: contain;
-  margin: 20px 0;
-  border-radius: 10px;
-}
-.modal-actions .btn {
-  margin: 0 10px;
-}
-.close-modal {
-  position: absolute;
-  top: 12px;
-  right: 18px;
-  font-size: 28px;
-  color: #fff;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
-.close-modal:hover {
-  color: #ff4f4f;
-  transform: rotate(90deg);
-}
-.modal-title {
-  font-size: 1.5rem;
-  color: #FFD700;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-@keyframes scaleIn {
-  from { transform: scale(0.7); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-@keyframes slideFadeUp {
-  0% { transform: translateY(40px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-@keyframes floatGlow {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(20px, 20px); }
-}
-
-/* Glow Button Hover */
-.btn.glow-btn {
-  transition: 0.3s ease;
-  box-shadow: 0 0 0 rgba(255, 255, 255, 0);
-}
-.btn.glow-btn:hover {
-  box-shadow: 0 0 12px 2px #fcd116;
-  transform: scale(1.05);
-}
-
-/* Project Cards */
-.project-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1.5rem;
-  padding: 1.75rem;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(14px);
-  transform-style: preserve-3d;
-  transition: transform 0.4s ease-in-out, box-shadow 0.4s ease;
-}
-.project-card:hover {
-  transform: scale(1.05);
-  background: linear-gradient(145deg, rgba(50, 20, 90, 0.4), rgba(100, 20, 150, 0.25));
-  box-shadow: 0 0 30px #ffcc00;
-}
-.card-content {
-  opacity: 0.95;
-  transition: all 0.4s ease;
-}
-.buttons a.btn {
-  display: inline-block;
-  margin-top: 10px;
-  margin-right: 10px;
-  background: #fcd116;
-  color: white;
-  padding: 0.5rem 1.2rem;
-  border-radius: 9999px;
-  font-size: 0.875rem;
-  transition: background 0.3s ease;
-}
-.buttons a.btn:hover {
-  background: #ffdb4d;
-}
-</style>
+    .wave-bg {
+      background: linear-gradient(135deg, #23233f 70%, #FFD700 200%);
+      position: relative;
+      overflow: hidden;
+    }
+    .wave-bg:after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: -24px; height: 64px;
+      background: url('data:image/svg+xml;utf8,<svg width="100%" height="64" xmlns="http://www.w3.org/2000/svg"><path d="M0,10 Q100,60 400,10 T800,20 L800,64 L0,64 Z" fill="%23FFD700" fill-opacity="0.09"/></svg>');
+      pointer-events: none;
+      z-index: 1;
+    }
+    .glass {
+      background: rgba(36, 38, 50, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .divider {
+      height: 3px;
+      width: 4rem;
+      margin: 2rem 0 1.5rem;
+      background: linear-gradient(90deg, #FFD700 10%, #ffb03a 40%, #49e9ff 80%, #FFD700 100%);
+      border-radius: 2px;
+    }
+    .toggle-slider {
+      width: 48px; height: 26px;
+      background: #bbb; border-radius: 26px;
+      position: relative; cursor: pointer;
+      transition: background 0.25s ease-in-out;
+    }
+    .toggle-slider.active { background: #FFD700; }
+    .toggle-dot {
+      position: absolute; top: 3px; left: 3px;
+      width: 20px; height: 20px;
+      border-radius: 50%; background: #fff;
+      box-shadow: 0 1px 5px #0002;
+      transition: left 0.3s ease, background 0.25s ease;
+    }
+    .toggle-slider.active .toggle-dot {
+      left: 25px; background: #FFD700;
+    }
+    .certificate-slider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 40px 0;
+      position: relative;
+    }
+    .cards-wrapper {
+      display: flex;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      gap: 20px;
+      padding: 10px 0;
+      scrollbar-width: none;
+      scroll-snap-type: x mandatory;
+    }
+    .cards-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+    .card {
+      scroll-snap-align: start;
+      position: relative;
+      min-width: 280px;
+      height: 280px;
+      border-radius: 16px;
+      overflow: hidden;
+      background-color: #232347;
+      background-image: linear-gradient(#232347, #232347),
+        linear-gradient(135deg, gold, #fcd116, #ffcc00);
+      background-origin: border-box;
+      background-clip: content-box, border-box;
+      border: 2px solid transparent;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.3), 0 6px 18px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: scale(1.035);
+      box-shadow: 0 0 24px rgba(255, 215, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .card p {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: #1a1a30;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 10px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      margin: 0;
+    }
+    .slider-btn {
+      background: #233355;
+      color: white;
+      border: none;
+      font-size: 24px;
+      padding: 10px 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 2;
+      transition: background 0.2s ease-in-out;
+    }
+    .slider-btn:hover {
+      background: #3e4c6d;
+    }
+    .image-modal {
+      display: none;
+      position: fixed;
+      z-index: 99;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      animation: fadeIn 0.3s ease;
+    }
+    .image-modal img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+    }
+    .image-modal #caption {
+      color: #fff;
+      margin-top: 12px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .close-btn {
+      position: absolute;
+      top: 20px; right: 35px;
+      color: white;
+      font-size: 36px;
+      cursor: pointer;
+    }
+    .hero-section.container {
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .hero-content {
+      animation: slideFadeUp 1s ease-out forwards;
+      opacity: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-content h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+    }
+    .resume-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.5s ease forwards;
+    }
+    .resume-modal-content {
+      background: #1e1e2f;
+      padding: 2rem;
+      border-radius: 16px;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
+      animation: scaleIn 0.3s ease forwards;
+    }
+    .resume-preview {
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      margin: 20px 0;
+      border-radius: 10px;
+    }
+    .modal-actions .btn {
+      margin: 0 10px;
+    }
+    .close-modal {
+      position: absolute;
+      top: 12px;
+      right: 18px;
+      font-size: 28px;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    .close-modal:hover {
+      color: #ff4f4f;
+      transform: rotate(90deg);
+    }
+    .modal-title {
+      font-size: 1.5rem;
+      color: #FFD700;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes scaleIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    @keyframes slideFadeUp { 0% { transform: translateY(40px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+    @keyframes floatGlow { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(20px, 20px); } }
+    .btn.glow-btn { transition: 0.3s ease; box-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+    .btn.glow-btn:hover { box-shadow: 0 0 12px 2px #fcd116; transform: scale(1.05); }
+    .project-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1.5rem;
+      padding: 1.75rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(14px);
+      transform-style: preserve-3d;
+      transition: transform 0.4s ease-in-out, box-shadow 0.4s ease;
+    }
+    .project-card:hover {
+      transform: scale(1.05);
+      background: linear-gradient(145deg, rgba(50, 20, 90, 0.4), rgba(100, 20, 150, 0.25));
+      box-shadow: 0 0 30px #ffcc00;
+    }
+    .card-content {
+      opacity: 0.95;
+      transition: all 0.4s ease;
+    }
+    .buttons a.btn {
+      display: inline-block;
+      margin-top: 10px;
+      margin-right: 10px;
+      background: #fcd116;
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      transition: background 0.3s ease;
+    }
+    .buttons a.btn:hover {
+      background: #ffdb4d;
+    }
+    .project-card.hovered {
+      transform: scale(1.03);
+      box-shadow: 0 0 25px rgba(147, 51, 234, 0.6), 0 0 10px rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease-in-out;
+    }
+  </style>
 </head>
 <body class="font-poppins bg-primary text-gray-200 dark:bg-secondary dark:text-gray-50 transition-colors duration-500">
+
 
   <!-- HEADER with Artistic BG -->
   <header class="wave-bg overflow-hidden relative pb-20 pt-12 px-4 md:px-0">
@@ -348,36 +309,31 @@
       </div>
     </div>
   </header>
-  
+
 
   <main class="mt-2">
-    <!-- ABOUT -->
-    <!-- 🔥 HERO SECTION -->
-<section class="hero-section container glass" id="hero">
-  <div class="hero-content" data-aos="fade-up">
-    <h1>Hello, I’m <span class="highlight">Sudheendra G K</span></h1>
-    <p>Turning ideas into interactive realities.<br>Web Developer • Designer • Innovator</p>
-    <div class="hero-buttons">
-      <button class="btn glow-btn" id="openResumeModal">View Resume</button>
-      <a href="mailto:sudhig10@gmail.com" class="btn glow-btn">Hire Me</a>
-    </div>
-  </div>
-</section>
-
-<!-- 📄 RESUME MODAL -->
-<div class="resume-modal" id="resumeModal">
-  <div class="resume-modal-content">
-    <span class="close-modal" id="closeResumeModal">&times;</span>
-    <h2 class="modal-title">My Resume</h2>
-    <div class="modal-actions">
-      <a href="resume001.pdf" target="_blank" class="btn view-btn">View Fullscreen</a>
-      <a href="resume001.pdf" download class="btn download-btn">Download</a>
-    </div>
-  </div>
-</div>
-
-
-   
+    <!-- ABOUT ME -->
+    <section class="max-w-3xl mx-auto glass rounded-2xl p-8 shadow-xl my-8" id="about">
+      <div class="divider"></div>
+      <h2 class="text-2xl font-heading font-bold text-accent mb-2">About Me</h2>
+      <p class="text-gray-100 leading-relaxed text-lg">
+        Hi, I’m Sudheendra G K—a passionate <span class="text-accent">Cyber Security student</span>, <span class="text-accent">tech entrepreneur</span>, and creative <span class="text-accent">developer</span> dedicated to transforming innovative ideas into secure, beautiful, and impactful digital experiences.<br><br>
+        My journey started with a love for computers and problem-solving, which drove me to explore full-stack development, UI/UX, and security engineering. I thrive in collaborative environments, enjoy building real products from scratch, and continuously learn from both startup hustle and industry standards.<br><br>
+        Outside of coding, I explore new tech, brainstorm startup ideas, and focus on personal fitness. Let’s build something game-changing together!
+      </p>
+    </section>
+    
+    <!-- HERO SECTION -->
+    <section class="hero-section container glass" id="hero">
+      <div class="hero-content" data-aos="fade-up">
+        <h1>Hello, I’m <span class="highlight">Sudheendra G K</span></h1>
+        <p>Turning ideas into interactive realities.<br>Web Developer • Designer • Innovator</p>
+        <div class="hero-buttons">
+          <button class="btn glow-btn" id="openResumeModal">View Resume</button>
+          <a href="mailto:sudhig10@gmail.com" class="btn glow-btn">Hire Me</a>
+        </div>
+      </div>
+    </section>
 
     <!-- SKILLS -->
     <section class="max-w-3xl mx-auto glass rounded-2xl p-8 shadow-glow my-6" data-aos="fade-up">
@@ -385,278 +341,267 @@
       <h2 class="text-2xl font-heading font-bold text-accent mb-2">Technical Skills</h2>
       <div class="flex flex-wrap gap-3 mb-4 mt-3">
         <!-- Skill Badges with MySQL added -->
-<span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
-  <i class="fab fa-html5 text-orange-500"></i> HTML
-</span>
-
-<span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
-  <i class="fab fa-css3-alt text-blue-400"></i> CSS
-</span>
-
-<span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
-  <i class="fab fa-js-square text-yellow-400"></i> JavaScript
-</span>
-
-<span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
-  <i class="fab fa-python text-teal-400"></i> Python
-</span>
-
-<span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
-  <i class="fab fa-java text-red-500"></i> Java
-</span>
-
-<span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
-  <i class="fas fa-lock text-purple-500"></i> Cyber Security
-</span>
-
-<span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
-  <i class="fas fa-database text-blue-600"></i> MySQL
-</span>
-
-<span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
-  <i class="fas fa-paint-brush text-pink-400"></i> UI/UX Design
-</span>
-
-<span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
-  <i class="fab fa-git-alt text-orange-600"></i> Git
-</span>
-
-<span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
-  <i class="fas fa-terminal text-gray-500"></i> DSA
-</span>
-
-
+        <span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
+          <i class="fab fa-html5 text-orange-500"></i> HTML
+        </span>
+        <span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
+          <i class="fab fa-css3-alt text-blue-400"></i> CSS
+        </span>
+        <span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
+          <i class="fab fa-js-square text-yellow-400"></i> JavaScript
+        </span>
+        <span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
+          <i class="fab fa-python text-teal-400"></i> Python
+        </span>
+        <span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
+          <i class="fab fa-java text-red-500"></i> Java
+        </span>
+        <span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
+          <i class="fas fa-lock text-purple-500"></i> Cyber Security
+        </span>
+        <span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
+          <i class="fas fa-database text-blue-600"></i> MySQL
+        </span>
+        <span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
+          <i class="fas fa-paint-brush text-pink-400"></i> UI/UX Design
+        </span>
+        <span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
+          <i class="fab fa-git-alt text-orange-600"></i> Git
+        </span>
+        <span class="flex items-center gap-2 bg-accent/10 text-accent px-4 py-1 rounded-full text-base font-medium shadow">
+          <i class="fas fa-terminal text-gray-500"></i> DSA
+        </span>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
         <div class="bg-[#2c2a38e6] dark:bg-[#191824e6] rounded-xl p-4">
           <h3 class="text-lg font-bold text-accent mb-2">Tools & Platforms</h3>
-         <ul class="list-disc list-inside leading-relaxed text-gray-100 space-y-1">
-
-  <!-- Version Control -->
-  <li><i class="fab fa-github text-accent"></i> Git & GitHub</li>
-
-  <!-- Code Editors & CLI -->
-  <li><i class="fas fa-terminal text-accent"></i> VS Code & Linux Terminal</li>
-
-  <!-- UI/UX & Design -->
-  <li><i class="fab fa-figma text-accent"></i> Figma</li>
-
-  <!-- Deployment Platforms -->
-  <li><i class="fas fa-globe text-accent"></i> GitHub Pages & Netlify</li>
-
-  <!-- Styling & Frameworks -->
-  <li><i class="fas fa-paint-brush text-accent"></i> Tailwind CSS</li>
-
-  <!-- JS Libraries -->
-  <li><i class="fas fa-sliders-h text-accent"></i> Custom Slider.js & Modals (Vanilla JS)</li>
-
-  <!-- Charts & Data Viz -->
-  <li><i class="fas fa-chart-line text-accent"></i> Chart.js</li>
-
-  <!-- DB & Backend (Basics) -->
-  <li><i class="fas fa-database text-accent"></i> MySQL (Basics)</li>
-
-  <!-- Hardware & Experiments -->
-  <li><i class="fas fa-microchip text-accent"></i> Raspberry Pi</li>
-
-</ul>
+          <ul class="list-disc list-inside leading-relaxed text-gray-100 space-y-1">
+            <li><i class="fab fa-github text-accent"></i> Git & GitHub</li>
+            <li><i class="fas fa-terminal text-accent"></i> VS Code & Linux Terminal</li>
+            <li><i class="fab fa-figma text-accent"></i> Figma</li>
+            <li><i class="fas fa-globe text-accent"></i> GitHub Pages & Netlify</li>
+            <li><i class="fas fa-paint-brush text-accent"></i> Tailwind CSS</li>
+            <li><i class="fas fa-sliders-h text-accent"></i> Custom Slider.js & Modals (Vanilla JS)</li>
+            <li><i class="fas fa-chart-line text-accent"></i> Chart.js</li>
+            <li><i class="fas fa-database text-accent"></i> MySQL (Basics)</li>
+            <li><i class="fas fa-microchip text-accent"></i> Raspberry Pi</li>
+          </ul>
         </div>
         <div class="bg-[#2c2a38e6] dark:bg-[#191824e6] rounded-xl p-4">
           <h3 class="text-lg font-bold text-accent mb-2">Interests & Focus</h3>
           <div class="flex flex-wrap gap-2">
-             <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Web Development</span>
-  <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Frontend Development</span>
-  <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Backend Development</span>
-
-  <!-- Tech & Security -->
-  <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Cyber Security</span>
-  <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Data Structures & Algorithms</span>
-  <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Data Analysis</span>
-
-  <!-- Business & Entrepreneurship -->
-  <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Startup Ideation</span>
-  <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Business Strategy</span>
-  <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Market Research</span>
-  <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Tech Entrepreneurship</span>
-
-  <!-- Personal Growth -->
-  <span class="bg-gradient-to-r from-yellow-500 to-amber-400 text-primary px-3 py-1 rounded-lg text-sm mb-1">Fitness</span>
-
+            <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Web Development</span>
+            <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Frontend Development</span>
+            <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Backend Development</span>
+            <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Cyber Security</span>
+            <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Data Structures & Algorithms</span>
+            <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Data Analysis</span>
+            <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Startup Ideation</span>
+            <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Business Strategy</span>
+            <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Market Research</span>
+            <span class="bg-accent/20 text-accent px-3 py-1 rounded-lg text-sm mb-1">Tech Entrepreneurship</span>
+            <span class="bg-gradient-to-r from-yellow-500 to-amber-400 text-primary px-3 py-1 rounded-lg text-sm mb-1">Fitness</span>
           </div>
         </div>
       </div>
     </section>
 
-   <section class="projects-section p-8">
+    <!-- ... [Header, About, Skills sections as above, unchanged] ... -->
+
+<section class="projects-section p-8">
   <h2 class="text-4xl font-bold text-white text-center mb-12" data-aos="fade-up">Projects</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
-    
-  <!-- Project Cards -->
-       <!-- Wonder -->
-    <div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50" data-aos="zoom-in" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.4">
+
+    <!-- Wonder -->
+    <div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50" data-aos="zoom-in" data-tilt>
       <div class="card-content">
         <h3 class="text-xl font-semibold text-white mb-2">Wonder - E-Commerce</h3>
-        <p class="text-gray-300 text-sm mb-3">Responsive e-commerce frontend with modal login, dynamic JS, and category navigation.</p>
-        <p class="text-xs text-purple-300 mb-3">HTML · CSS · JavaScript · Tailwind</p>
+        <p class="mb-1 text-xs italic text-accent">Role: Lead Frontend & UI</p>
+        <div class="mb-1 flex flex-wrap gap-2">
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-accent text-xs rounded">HTML</span>
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-accent text-xs rounded">CSS</span>
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-yellow-500 text-xs rounded">JavaScript</span>
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-blue-400 text-xs rounded">Tailwind</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-2">
+          Built a modern, responsive e-commerce UI with custom modal login and stateful category navigation.
+          <br><span class="text-accent">Challenge:</span> Seamless modal logic with no frameworks.<br>
+          <span class="text-accent">Solution:</span> Designed clean JS logic and accessibility-first UX.
+        </p>
         <div class="buttons">
-          <a href="https://github.com/Sudhi0001/Wonder" target="_blank" class="btn">GitHub</a>
-          <a href="https://sudhi0001.github.io/Wonder/" target="_blank" class="btn">Live</a>
+          <a href="https://github.com/Sudhi0001/Wonder" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub</a>
+          <a href="https://sudhi0001.github.io/Wonder/" target="_blank" class="btn"><i class="fas fa-external-link-alt"></i> Live</a>
         </div>
       </div>
     </div>
 
     <!-- MindSync -->
-    <div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/50" data-aos="zoom-in" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.4">
+    <div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/50" data-aos="zoom-in" data-tilt>
       <div class="card-content">
         <h3 class="text-xl font-semibold text-white mb-2">MindSync - AI Support Platform</h3>
-        <p class="text-gray-300 text-sm mb-3">A student helpdesk AI assistant and educational resource hub with doubt clarification and notes.</p>
-        <p class="text-xs text-purple-300 mb-3">HTML · CSS · JS · AI API</p>
+        <p class="mb-1 text-xs italic text-accent">Role: Fullstack Dev & AI Integrator</p>
+        <div class="mb-1 flex flex-wrap gap-2">
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-purple-600 text-xs rounded">HTML</span>
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-yellow-400 text-xs rounded">JS</span>
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-sky-500 text-xs rounded">AI API</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-2">
+          Built a student helpdesk platform with integrated AI assistant for Q&A, notes, and resource sharing.<br>
+          <span class="text-accent">Challenge:</span> Merging diverse resources and live AI in a clear dashboard.<br>
+          <span class="text-accent">Solution:</span> Used clean JS modules and API error handling for reliability.
+        </p>
         <div class="buttons">
-          <a href="https://github.com/Sudhi0001/MindSync" target="_blank" class="btn">GitHub</a>
-          <a href="#" class="btn">Live</a>
+          <a href="https://github.com/Sudhi0001/MindSync" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub</a>
+          <a href="#" class="btn disabled"><i class="fas fa-external-link-alt"></i> Live</a>
         </div>
       </div>
     </div>
 
     <!-- Algo Arena -->
-    <div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/50" data-aos="zoom-in" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.4">
+    <div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/50" data-aos="zoom-in" data-tilt>
       <div class="card-content">
         <h3 class="text-xl font-semibold text-white mb-2">Algo Arena - DSA Playground</h3>
-        <p class="text-gray-300 text-sm mb-3">Interactive DSA dashboard with quizzes, visualizers, XP system, and gamified learning.</p>
-        <p class="text-xs text-purple-300 mb-3">HTML · CSS · JavaScript · Chart.js</p>
+        <p class="mb-1 text-xs italic text-accent">Role: Product Designer & JS Dev</p>
+        <div class="mb-1 flex flex-wrap gap-2">
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-yellow-500 text-xs rounded">JavaScript</span>
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-blue-600 text-xs rounded">Chart.js</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-2">
+          Developed a gamified platform for DSA learners with XP tracking, quizzes, and visual explanations.<br>
+          <span class="text-accent">Challenge:</span> Making DSA visual and interactive.<br>
+          <span class="text-accent">Solution:</span> Used Chart.js and custom logic for immediate feedback.
+        </p>
         <div class="buttons">
-          <a href="https://github.com/Sudhi0001/AlgoArena" target="_blank" class="btn">GitHub</a>
-          <a href="https://sudhi0001.github.io/AlgoArena/" target="_blank" class="btn">Live</a>
+          <a href="https://github.com/Sudhi0001/AlgoArena" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub</a>
+          <a href="https://sudhi0001.github.io/AlgoArena/" target="_blank" class="btn"><i class="fas fa-external-link-alt"></i> Live</a>
         </div>
       </div>
     </div>
 
     <!-- Freejunx -->
-    <div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/50" data-aos="zoom-in" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.4">
+    <div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/50" data-aos="zoom-in" data-tilt>
       <div class="card-content">
         <h3 class="text-xl font-semibold text-white mb-2">Freejunx - Freelance Website</h3>
-        <p class="text-gray-300 text-sm mb-3">Gourmet food website built from scratch. Delivered at ₹9K, agency quality worth ₹75K.</p>
-        <p class="text-xs text-purple-300 mb-3">HTML · CSS · JavaScript · Responsive</p>
+        <p class="mb-1 text-xs italic text-accent">Role: UI/UX & Frontend Dev (Client Delivery)</p>
+        <div class="mb-1 flex flex-wrap gap-2">
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-accent text-xs rounded">HTML</span>
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-blue-400 text-xs rounded">CSS</span>
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-yellow-400 text-xs rounded">JavaScript</span>
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-teal-500 text-xs rounded">Responsive</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-2">
+          Designed and shipped a gourmet food business website for a client, delivering agency-level quality at freelancer cost.<br>
+          <span class="text-accent">Challenge:</span> Ensuring slick, mobile-first UX on a budget.<br>
+          <span class="text-accent">Solution:</span> Used custom animations and CSS utilities to save dev time.
+        </p>
         <div class="buttons">
-          <a href="https://github.com/Sudhi0001/Freejunx" target="_blank" class="btn">GitHub</a>
-          <a href="https://freejunxfoods.github.io/marketing/" target="_blank" class="btn">Live</a>
+          <a href="https://github.com/Sudhi0001/Freejunx" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub</a>
+          <a href="https://freejunxfoods.github.io/marketing/" target="_blank" class="btn"><i class="fas fa-external-link-alt"></i> Live</a>
         </div>
       </div>
     </div>
 
-    <!-- BEL -->
-    <div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50" data-aos="zoom-in" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.4">
+    <!-- BEL Internship Project -->
+    <div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/50" data-aos="zoom-in" data-tilt>
       <div class="card-content">
         <h3 class="text-xl font-semibold text-white mb-2">BEL Internship Project</h3>
-        <p class="text-gray-300 text-sm mb-3">Text summarization tool using ML techniques done as part of Bharat Electronics internship.</p>
-        <p class="text-xs text-purple-300 mb-3">Python · ML · Flask</p>
+        <p class="mb-1 text-xs italic text-accent">Role: ML Intern & Python Dev</p>
+        <div class="mb-1 flex flex-wrap gap-2">
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-teal-500 text-xs rounded">Python</span>
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-indigo-500 text-xs rounded">ML</span>
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-pink-500 text-xs rounded">Flask</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-2">
+          Built and trained a text summarization tool for enterprise docs as a real client deliverable.<br>
+          <span class="text-accent">Challenge:</span> Applying ML to diverse real-world data.<br>
+          <span class="text-accent">Solution:</span> Custom pipelines with Python, Flask, and pre-processing.
+        </p>
         <div class="buttons">
-          <a href="https://github.com/Sudhi0001/BELTextSummarizer" target="_blank" class="btn">GitHub</a>
-          <a href="#" class="btn">Live</a>
+          <a href="https://github.com/Sudhi0001/BELTextSummarizer" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub</a>
+          <a href="#" class="btn disabled"><i class="fas fa-external-link-alt"></i> Live</a>
         </div>
       </div>
     </div>
 
     <!-- WellVerra -->
-<div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-teal-500/50"
-     data-aos="zoom-in" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.4">
-  <div class="card-content">
-    <h3 class="text-xl font-semibold text-white mb-2">WellVerra – Wellness Platform</h3>
-    <p class="text-gray-300 text-sm mb-3">Sleek health & wellness website with animations, testimonials, and WhatsApp CTAs.</p>
-    <p class="text-xs text-purple-300 mb-3">HTML · CSS · JavaScript · Tailwind · WhatsApp API</p>
-    <div class="buttons flex gap-3">
-      <a href="https://github.com/Sudhi0001/Wellverra" target="_blank" class="btn flex items-center gap-2">
-        <!-- GitHub icon SVG -->
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12…Z" />
-        </svg>
-        GitHub
-      </a>
-      <a href="https://sudhi0001.github.io/Wellverra" target="_blank" class="btn flex items-center gap-2">
-        <!-- Live icon SVG -->
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M14 3h7v7m0 0L10 21l-4-4L21 10z"/>
-        </svg>
-        Live
-      </a>
-    </div>
-  </div>
-</div>
-
-
-  </div>
-</section>
-
-
-       
-
-
-    
-<div class="certificate-slider">
-  <button class="slider-btn prev" onclick="slideLeft()">&#10094;</button>
-  <div class="cards-wrapper" id="sliderWrapper">
-
-    <div class="card" onclick="openModal('images/WhatsApp Image 2025-07-25 at 21.31.43_1f6fde62.jpg', 'Scaler Python Basics')">
-      <img src="images/WhatsApp Image 2025-07-25 at 21.31.43_1f6fde62.jpg" alt="Scaler Python Basics">
-      <p>Scaler Python Basics</p>
-    </div>
-
-    <div class="card" onclick="openModal('images/bel.jpg', 'BEL Internship')">
-      <img src="images/bel.jpg" alt="BEL Internship">
-      <p>BEL Internship</p>
-    </div>
-
-    <div class="card" onclick="openModal('images/rinex.jpg', 'RINEX AI & ML Basics')">
-      <img src="images/rinex.jpg" alt="RINEX AI & ML Basics">
-      <p>RINEX AI & ML Basics</p>
-    </div>
-
-    <div class="card" onclick="openModal('images/udemy.jpg', 'Udemy Digital Forensics')">
-      <img src="images/udemy.jpg" alt="Udemy Digital Forensics">
-      <p>Udemy Digital Forensics</p>
-    </div>
-     <div class="card" onclick="openModal('images/system.png', 'Java Project: Torn System')">
-        <img src="images/system.png" alt="Java Project: Torn System">
-        <p>Java Project: Torn System</p>
+    <div class="project-card group transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-teal-500/50" data-aos="zoom-in" data-tilt>
+      <div class="card-content">
+        <h3 class="text-xl font-semibold text-white mb-2">WellVerra – Wellness Platform</h3>
+        <p class="mb-1 text-xs italic text-accent">Role: UI/UX, Animations & Integrator</p>
+        <div class="mb-1 flex flex-wrap gap-2">
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-accent text-xs rounded">HTML</span>
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-blue-400 text-xs rounded">CSS</span>
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-yellow-400 text-xs rounded">JS</span>
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-teal-500 text-xs rounded">Tailwind</span>
+          <span class="inline-block px-2 py-0.5 bg-accent/10 text-green-500 text-xs rounded">WhatsApp API</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-2">
+          Delivered a polished wellness and health platform with animated UI, testimonial gallery & WhatsApp call-to-actions.<br>
+          <span class="text-accent">Challenge:</span> Building engaging, conversion-driven landing experience.<br>
+          <span class="text-accent">Solution:</span> Unique CSS animation and real-time WhatsApp integration.
+        </p>
+        <div class="buttons flex gap-3">
+          <a href="https://github.com/Sudhi0001/Wellverra" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub</a>
+          <a href="https://sudhi0001.github.io/Wellverra" target="_blank" class="btn"><i class="fas fa-external-link-alt"></i> Live</a>
+        </div>
       </div>
+    </div>
 
-    
+    <!-- [You may add more projects here in this format. For academic, hackathon, freelance, or personal side-projects, use the same "Role", "Challenge", "Solution", stack tags, outcomes] -->
 
   </div>
-  <button class="slider-btn next" onclick="slideRight()">&#10095;</button>
-</div>
-
-
-<!-- Modal -->
-<div class="image-modal" id="imageModal" onclick="closeModal()">
-  <span class="close-btn">&times;</span>
-  <img class="modal-content" id="modalImg">
-  <div id="caption"></div>
-</div>
-
-
-
-
-
-
-
-    
-   <!-- Resume Section -->
-<section class="max-w-3xl mx-auto glass rounded-2xl p-8 shadow-xl my-6" data-aos="fade-up">
-  <div class="divider"></div>
-  <h2 class="text-2xl font-heading font-bold text-accent mb-2">Resume</h2>
-  <button onclick="openResumeModal()" class="flex gap-2 items-center text-accent hover:text-yellow-200 hover:underline text-lg font-semibold transition">
-    <i class="fas fa-file-pdf"></i> View Resume (PDF)
-  </button>
 </section>
 
-<!-- Modal -->
-<div id="resumeModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 hidden">
-  <div class="relative w-full max-w-4xl h-[90vh] bg-white rounded-lg overflow-hidden shadow-lg">
-    <button onclick="closeResumeModal()" class="absolute top-3 right-4 text-3xl font-bold text-black hover:text-red-500">&times;</button>
-    <iframe src="resume001.pdf" class="w-full h-full" frameborder="0"></iframe>
-  </div>
-</div>
+
+    <!-- CERTIFICATE CARDS (leave as originally, or expand with context as explained previously) -->
+    <div class="certificate-slider">
+      <button class="slider-btn prev" onclick="slideLeft()">&#10094;</button>
+      <div class="cards-wrapper" id="sliderWrapper">
+        <div class="card" onclick="openModal('images/WhatsApp Image 2025-07-25 at 21.31.43_1f6fde62.jpg', 'Scaler Python Basics - Scaler Academy')">
+          <img src="images/WhatsApp Image 2025-07-25 at 21.31.43_1f6fde62.jpg" alt="Scaler Python Basics">
+          <p>Scaler Python Basics<br><span class="text-xs text-yellow-300">Scaler Academy</span></p>
+        </div>
+        <div class="card" onclick="openModal('images/bel.jpg', 'BEL Internship - Bharat Electronics Ltd')">
+          <img src="images/bel.jpg" alt="BEL Internship">
+          <p>BEL Internship<br><span class="text-xs text-yellow-300">Bharat Electronics</span></p>
+        </div>
+        <div class="card" onclick="openModal('images/rinex.jpg', 'RINEX AI & ML Basics - RINEX')">
+          <img src="images/rinex.jpg" alt="RINEX AI & ML Basics">
+          <p>RINEX AI & ML Basics<br><span class="text-xs text-yellow-300">RINEX</span></p>
+        </div>
+        <div class="card" onclick="openModal('images/udemy.jpg', 'Udemy Digital Forensics - Udemy Certified')">
+          <img src="images/udemy.jpg" alt="Udemy Digital Forensics">
+          <p>Udemy Digital Forensics<br><span class="text-xs text-yellow-300">Udemy</span></p>
+        </div>
+        <div class="card" onclick="openModal('images/system.png', 'Java Project: Torn System - Academic')">
+          <img src="images/system.png" alt="Java Project: Torn System">
+          <p>Java Project: Torn System<br><span class="text-xs text-yellow-300">University</span></p>
+        </div>
+      </div>
+      <button class="slider-btn next" onclick="slideRight()">&#10095;</button>
+    </div>
+    <!-- Modal -->
+    <div class="image-modal" id="imageModal" onclick="closeModal()">
+      <span class="close-btn">&times;</span>
+      <img class="modal-content" id="modalImg">
+      <div id="caption"></div>
+    </div>
+
+    <!-- Resume Section -->
+    <section class="max-w-3xl mx-auto glass rounded-2xl p-8 shadow-xl my-6" data-aos="fade-up">
+      <div class="divider"></div>
+      <h2 class="text-2xl font-heading font-bold text-accent mb-2">Resume</h2>
+      <button onclick="openResumeModal()" class="flex gap-2 items-center text-accent hover:text-yellow-200 hover:underline text-lg font-semibold transition">
+        <i class="fas fa-file-pdf"></i> View Resume (PDF)
+      </button>
+    </section>
+    <!-- Modal -->
+    <div id="resumeModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 hidden">
+      <div class="relative w-full max-w-4xl h-[90vh] bg-white rounded-lg overflow-hidden shadow-lg">
+        <button onclick="closeResumeModal()" class="absolute top-3 right-4 text-3xl font-bold text-black hover:text-red-500">&times;</button>
+        <iframe src="resume_sudhi.pdf" class="w-full h-full" frameborder="0"></iframe>
+      </div>
+    </div>
 
     <!-- CONTACT -->
     <section class="max-w-3xl mx-auto glass rounded-2xl p-8 shadow-xl my-6" data-aos="fade-up">
@@ -680,172 +625,114 @@
     <span class="text-gray-400 text-sm">© 2025 Sudheendra G K. Crafted with <span class="text-accent">♥</span></span>
   </footer>
 
-  <!-- DARK MODE SCRIPT (Animated, Persistent) -->
- <script>
-  // DARK MODE TOGGLE
-  const darkToggle = document.getElementById('darkToggle');
-  function setDarkModeOnStartup() {
-    if (localStorage.getItem('theme') === 'dark') {
-      document.documentElement.classList.add('dark');
-      darkToggle.classList.add('active');
-      darkToggle.setAttribute('aria-pressed', 'true');
+  <!-- JS (remains as in your current site) -->
+  <script>
+    // DARK MODE TOGGLE
+    const darkToggle = document.getElementById('darkToggle');
+    function setDarkModeOnStartup() {
+      if (localStorage.getItem('theme') === 'dark') {
+        document.documentElement.classList.add('dark');
+        darkToggle.classList.add('active');
+        darkToggle.setAttribute('aria-pressed', 'true');
+      }
     }
-  }
-
-  setDarkModeOnStartup();
-
-  darkToggle?.addEventListener('click', () => {
-    const isDark = document.documentElement.classList.toggle('dark');
-    darkToggle.classList.toggle('active', isDark);
-    darkToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  });
-
-  darkToggle?.addEventListener('keydown', e => {
-    if (e.key === ' ' || e.key === 'Enter') darkToggle.click();
-  });
-</script>
-
-<script>
-  // CERTIFICATE ACCORDION
-  function toggleCert(id) {
-    const detail = document.getElementById(`${id}-detail`);
-    const isOpen = detail?.style.maxHeight && detail.style.maxHeight !== '0px';
-
-    document.querySelectorAll('[id$="-detail"]').forEach(el => {
-      el.style.maxHeight = null;
-      el.style.opacity = 0;
-      el.parentElement.setAttribute('aria-expanded', 'false');
+    setDarkModeOnStartup();
+    darkToggle?.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      darkToggle.classList.toggle('active', isDark);
+      darkToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
-
-    if (!isOpen && detail) {
-      detail.style.maxHeight = detail.scrollHeight + 'px';
-      detail.style.opacity = 1;
-      detail.parentElement.setAttribute('aria-expanded', 'true');
-    }
-  }
-
-  window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('[id$="-detail"]').forEach(el => {
-      el.style.maxHeight = null;
-      el.style.opacity = 0;
+    darkToggle?.addEventListener('keydown', e => {
+      if (e.key === ' ' || e.key === 'Enter') darkToggle.click();
     });
-  });
-</script>
-
-<script>
-  // CERTIFICATE IMAGE MODAL & SLIDER
-  function openModal(imageSrc, caption = '') {
-    const modal = document.getElementById('imageModal');
-    if (!modal) return;
-    document.getElementById('modalImg').src = imageSrc;
-    document.getElementById('caption').innerText = caption;
-    modal.style.display = 'flex';
-  }
-
-  function closeModal() {
-    const modal = document.getElementById('imageModal');
-    if (modal) modal.style.display = 'none';
-  }
-
-  function slideLeft() {
-    document.getElementById('sliderWrapper')?.scrollBy({ left: -320, behavior: 'smooth' });
-  }
-
-  function slideRight() {
-    document.getElementById('sliderWrapper')?.scrollBy({ left: 320, behavior: 'smooth' });
-  }
-
-  window.addEventListener('click', (e) => {
-    const imageModal = document.getElementById('imageModal');
-    if (e.target === imageModal) {
-      closeModal();
+  </script>
+  <script>
+    // CERTIFICATE IMAGE MODAL & SLIDER
+    function openModal(imageSrc, caption = '') {
+      const modal = document.getElementById('imageModal');
+      if (!modal) return;
+      document.getElementById('modalImg').src = imageSrc;
+      document.getElementById('caption').innerText = caption;
+      modal.style.display = 'flex';
     }
-  });
-</script>
-
-<script>
-  // RESUME MODAL FUNCTIONALITY
-  window.addEventListener('DOMContentLoaded', () => {
-    const openBtn = document.getElementById('openResumeModal');
-    const closeBtn = document.getElementById('closeResumeModal');
-    const modal = document.getElementById('resumeModal');
-
-    if (openBtn && closeBtn && modal) {
-      openBtn.addEventListener('click', () => {
-        modal.style.display = 'flex';
-      });
-
-      closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-      });
-
-      window.addEventListener('click', (e) => {
-        if (e.target === modal) {
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      if (modal) modal.style.display = 'none';
+    }
+    function slideLeft() {
+      document.getElementById('sliderWrapper')?.scrollBy({ left: -320, behavior: 'smooth' });
+    }
+    function slideRight() {
+      document.getElementById('sliderWrapper')?.scrollBy({ left: 320, behavior: 'smooth' });
+    }
+    window.addEventListener('click', (e) => {
+      const imageModal = document.getElementById('imageModal');
+      if (e.target === imageModal) {
+        closeModal();
+      }
+    });
+  </script>
+  <script>
+    // RESUME MODAL FUNCTIONALITY
+    window.addEventListener('DOMContentLoaded', () => {
+      const openBtn = document.getElementById('openResumeModal');
+      const closeBtn = document.getElementById('closeResumeModal');
+      const modal = document.getElementById('resumeModal');
+      if (openBtn && closeBtn && modal) {
+        openBtn.addEventListener('click', () => {
+          modal.style.display = 'flex';
+        });
+        closeBtn.addEventListener('click', () => {
           modal.style.display = 'none';
-        }
-      });
-    }
-  });
-</script>
-
-<script>
-  const openResumeModal = document.getElementById("openResumeModal");
-  const closeResumeModal = document.getElementById("closeResumeModal");
-  const resumeModal = document.getElementById("resumeModal");
-
-  openResumeModal.addEventListener("click", () => {
-    resumeModal.style.display = "flex";
-  });
-
-  closeResumeModal.addEventListener("click", () => {
-    resumeModal.style.display = "none";
-  });
-
-  window.addEventListener("click", (e) => {
-    if (e.target === resumeModal) {
+        });
+        window.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            modal.style.display = 'none';
+          }
+        });
+      }
+    });
+    const openResumeModal = document.getElementById("openResumeModal");
+    const closeResumeModal = document.getElementById("closeResumeModal");
+    const resumeModal = document.getElementById("resumeModal");
+    openResumeModal.addEventListener("click", () => {
+      resumeModal.style.display = "flex";
+    });
+    closeResumeModal.addEventListener("click", () => {
       resumeModal.style.display = "none";
-    }
-  });
-</script>
-
-<!-- AOS Animation -->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init();
-</script>
-
-<!-- Vanilla Tilt -->
-<script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
-<script>
-  // Enhanced Tilt + Glow + Hover
-  document.addEventListener("DOMContentLoaded", () => {
-    VanillaTilt.init(document.querySelectorAll(".project-card"), {
-      max: 15,
-      speed: 400,
-      glare: true,
-      "max-glare": 0.2
     });
-
-    document.querySelectorAll(".project-card").forEach(card => {
-      card.addEventListener("mouseenter", () => {
-        card.classList.add("hovered");
+    window.addEventListener("click", (e) => {
+      if (e.target === resumeModal) {
+        resumeModal.style.display = "none";
+      }
+    });
+  </script>
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  <!-- Vanilla Tilt -->
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      VanillaTilt.init(document.querySelectorAll(".project-card"), {
+        max: 15,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.2
       });
-      card.addEventListener("mouseleave", () => {
-        card.classList.remove("hovered");
+      document.querySelectorAll(".project-card").forEach(card => {
+        card.addEventListener("mouseenter", () => {
+          card.classList.add("hovered");
+        });
+        card.addEventListener("mouseleave", () => {
+          card.classList.remove("hovered");
+        });
       });
     });
-  });
-</script>
-<style>
-  .project-card.hovered {
-    transform: scale(1.03);
-    box-shadow: 0 0 25px rgba(147, 51, 234, 0.6), 0 0 10px rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease-in-out;
-  }
-</style>
-
-
+  </script>
 </body>
 </html>
