@@ -5,6 +5,7 @@ export default function ProjectDetail() {
   const { id } = useParams();
 
  const projects = {
+  
   mindsync: {
     title: "MindSync",
 
@@ -194,6 +195,35 @@ role:
 
     image: "/images/FoodHub.png",
   },
+  intellihire: {
+  title: "IntelliHire",
+
+  description:
+    "An AI-powered placement preparation platform that helps students practice aptitude, coding, interviews, resume analysis, and career planning in one unified system.",
+
+  problem:
+    "Students often rely on multiple disconnected platforms for placement preparation, making it difficult to track progress and receive personalized guidance.",
+
+  solution:
+    "Built a centralized platform that combines AI mentorship, mock interviews, coding practice, aptitude assessments, resume analysis, and progress tracking to streamline placement preparation.",
+
+  tech: "React.js, Tailwind CSS, FastAPI, Python, MongoDB, Gemini AI, JWT",
+
+  role: "Full Stack Developer",
+
+  features: [
+    "AI Career Mentor",
+    "AI Mock Interviews",
+    "Resume Analyzer",
+    "Coding Practice Platform",
+    "Aptitude Assessment System",
+    "Personalized Learning Roadmaps",
+    "Leaderboard & Progress Tracking",
+    "Authentication & User Management",
+  ],
+
+  image: "/images/IntelliHire.png",
+},
 };
 
   const project = projects[id];
