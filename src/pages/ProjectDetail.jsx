@@ -222,7 +222,7 @@ role:
     "Authentication & User Management",
   ],
 
-  image: "/images/IntelliHire.png",
+  image: "/images/intellihire.png",
 },
 };
 
