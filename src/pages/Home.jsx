@@ -154,8 +154,8 @@ export default function Home() {
 
         {/* GRID */}
        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 auto-rows-[260px]" id="projects">
-
-  <ProjectCard title="AlgoArena" year="2025" img="/images/algoarena.png" big live="https://sudhi0001.github.io/AlgoArena/" github="https://github.com/Sudhi0001/AlgoArena" />
+    <ProjectCard title="IntelliHire" year="202" img="/images/intellihire.png" big live="https://github.com/Sudhi0001/IntelliHire" github="https://github.com/Sudhi0001/IntelliHire" />
+    <ProjectCard title="AlgoArena" year="2025" img="/images/algoarena.png"  live="https://sudhi0001.github.io/AlgoArena/" github="https://github.com/Sudhi0001/AlgoArena" />
   <ProjectCard title="MindSync" year="2025" img="/images/mindsync.png" live="https://github.com/Sudhi0001/MindSync" github="https://github.com/Sudhi0001/MindSync" />
   <ProjectCard title="FREEJUNX" year="2025" img="/images/freejunx.png" live="https://www.freejunx.in/" github="https://www.freejunx.in/" />
 
